@@ -1,0 +1,20 @@
+<nav class="navbar navbar-light bg-light">
+  <span class="navbar-brand mb-0 h1"><%= link_to "< All restaurants", restaurants_path %></span>
+  <span class="navbar-brand mb-0 h1"><%= link_to 'Add a restaurant', new_restaurant_path %></span>
+</nav>
+<h1><%= @restaurant.name %></h1>
+<p>Category: <%= @restaurant.category.capitalize %></p>
+<p>Address: <%= @restaurant.address %></p>
+<p>Number: <%= @restaurant.phone_number %></p>
+<ul class="list-group">
+  <% @restaurant.reviews.each do |review| %>
+    <li class="list-group-item"><%= review.content %> | Rating: <%= review.rating %></li>
+  <% end %>
+</ul>
+
+<h1>Add a review</h1>
+<%= simple_form_for [ @restaurant, @review ] do |f| %>
+  <%= f.input :content %>
+  <%= f.input :rating %>
+  <%= f.submit "Submit review", class: "btn btn-primary" %>
+<% end %>
